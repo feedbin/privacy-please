@@ -22,7 +22,6 @@ def default_headers(content_type)
   {
     "Content-Type"            => content_type,
     "X-Frame-Options"         => "deny",
-    "X-Frame-Options"         => "deny",
     "X-XSS-Protection"        => "1; mode=block",
     "X-Content-Type-Options"  => "nosniff",
     "Content-Security-Policy" => "default-src 'none'; img-src data:; style-src 'unsafe-inline'",
@@ -44,7 +43,11 @@ end
 
 get "/:signature/:url" do
   url = hex_decode(params["url"])
-  response = HTTP.headers(accept: "image/png,image/svg+xml,image/*").get(url)
+  response = HTTP
+    .follow(max_hops: 5)
+    .timeout(connect: 30, write: 10, read: 30)
+    .headers(accept: "image/png,image/svg+xml,image/*")
+    .get(url)
   mime_type = response.content_type.mime_type
   if response.status.ok? && mime_type.start_with?("image/")
     headers default_headers(mime_type)

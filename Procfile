@@ -1,1 +1,1 @@
-web: bundle exec puma -t 32:64 -w 2
+web: bundle exec puma -C puma.rb

@@ -6,6 +6,8 @@ gem "sinatra"
 gem "http"
 
 group :development do
+  gem "capistrano"
+  gem "capistrano-bundler"
   gem "foreman"
 end
 
