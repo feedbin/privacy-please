@@ -1,1 +1,1 @@
-![Privacy Please](https://user-images.githubusercontent.com/133809/113089417-76dc3200-919c-11eb-9f86-fa5b26d9adb3.png)
+![Privacy Please](https://user-images.githubusercontent.com/133809/113089640-ed792f80-919c-11eb-931d-d36245568282.png)
