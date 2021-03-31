@@ -1,4 +1,4 @@
-![Privacy Please](https://user-images.githubusercontent.com/133809/113089640-ed792f80-919c-11eb-931d-d36245568282.png)
+![Privacy Please](https://user-images.githubusercontent.com/133809/113155154-98193e80-91ed-11eb-9ff8-296e91c5e49c.png)
 
 A proxy to enable privacy and TLS for images on the web.
 
