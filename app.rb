@@ -40,7 +40,7 @@ get "/:signature/:url" do
   halt(404) unless response.status.ok?
 
   content_type = response.content_type.mime_type
-  content_type = content_type.start_with?("image/") ? content_type : "application/octet-stream"
+  content_type = content_type&.start_with?("image/") ? content_type : "application/octet-stream"
 
   headers("Content-Type" => content_type)
   headers("Content-Length" => response.content_length) unless response.content_length.nil?
