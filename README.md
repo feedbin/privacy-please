@@ -4,14 +4,14 @@ A drop-in replacement for [camo](https://github.com/atmos/camo). Uses the same U
 
 ## Requirements
 
-Ruby 2.7
+- Ruby 2.7
 
 ## Installation
 
 ```
 git clone https://github.com/feedbin/privacy-please.git
-privacy-please
-bundle
+cd privacy-please
+bundle install
 bundle exec foreman start
 ```
 
