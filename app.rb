@@ -39,15 +39,15 @@ get "/:signature/:url" do
 
   halt(404) unless response.status.ok?
 
-  expires(time_for(DateTime.now.next_year), :public)
   content_type = response.content_type.mime_type
   content_type = content_type.start_with?("image/") ? content_type : "application/octet-stream"
-  headers({
-    "Content-Type"           => content_type,
-    "X-Content-Type-Options" => "nosniff",
-    "X-Frame-Options"        => "deny",
-    "X-XSS-Protection"       => "1; mode=block"
-  })
+
+  headers("Content-Type" => content_type)
+  headers("Content-Length" => response.content_length) unless response.content_length.nil?
+  headers("X-Content-Type-Options" => "nosniff")
+  headers("X-Frame-Options" => "deny")
+  headers("X-XSS-Protection" => "1; mode=block")
+  expires(time_for(DateTime.now.next_year), :public)
 
   stream do |out|
     response.body.each do |chunk|
