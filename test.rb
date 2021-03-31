@@ -28,8 +28,7 @@ class HelloWorldTest < Minitest::Test
     content_type = "image/jpeg"
     signature = OpenSSL::HMAC.hexdigest("sha1", "secret", url)
 
-    stub_request(:get, url).with(
-    headers: {
+    stub_request(:get, url).with(headers: {
       accept: "image/png,image/svg+xml,image/*",
     }).to_return({
       status: 200,
@@ -39,7 +38,6 @@ class HelloWorldTest < Minitest::Test
 
     get "/#{signature}/#{hex_encode(url)}"
     assert last_response.ok?
-    assert_equal "OK", last_response.body
     assert_equal content_type, last_response.get_header("Content-Type")
   end
 
@@ -47,13 +45,8 @@ class HelloWorldTest < Minitest::Test
     url = "http://example.com/image.jpg"
     signature = OpenSSL::HMAC.hexdigest("sha1", "secret", url)
 
-    stub_request(:get, url).with(
-    headers: {
-      accept: "image/png,image/svg+xml,image/*",
-    }).to_return({
-      status: 200,
-      body: "OK",
-      headers: {content_type: "text/plain"}
+    stub_request(:get, url).to_return({
+      status: 500
     })
 
     get "/#{signature}/#{hex_encode(url)}"
