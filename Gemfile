@@ -4,6 +4,7 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 gem "puma"
 gem "sinatra"
 gem "http"
+gem "sd_notify"
 
 group :development do
   gem "capistrano"

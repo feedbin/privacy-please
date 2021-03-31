@@ -53,6 +53,7 @@ GEM
     rake (13.0.3)
     rexml (3.2.4)
     ruby2_keywords (0.0.4)
+    sd_notify (0.1.1)
     sinatra (2.1.0)
       mustermann (~> 1.0)
       rack (~> 2.2)
@@ -82,6 +83,7 @@ DEPENDENCIES
   minitest
   puma
   rack-test
+  sd_notify
   sinatra
   webmock
 
