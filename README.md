@@ -2,7 +2,7 @@
 
 A proxy to enable privacy and TLS for images on the web.
 
-Privacy Please uses the same URL structure and signature method as [camo](https://github.com/atmos/camo).
+Privacy Please uses the same URL structure and signature method as [camo](https://github.com/atmos/camo) so it can work as a drop-in replacement.
 
 ## Requirements
 
