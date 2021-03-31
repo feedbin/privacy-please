@@ -1,6 +1,8 @@
 ![Privacy Please](https://user-images.githubusercontent.com/133809/113089640-ed792f80-919c-11eb-931d-d36245568282.png)
 
-A drop-in replacement for [camo](https://github.com/atmos/camo). Uses the same URL structure and signature method to stay compatible.
+A proxy to enable privacy and TLS for images on the web.
+
+Privacy Please uses the same URL structure and signature method as [camo](https://github.com/atmos/camo).
 
 ## Requirements
 
