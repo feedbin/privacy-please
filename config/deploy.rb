@@ -18,8 +18,6 @@ namespace :deploy do
   task :restart do
     on roles :all do
       execute :sudo, :systemctl, :restart, fetch(:application)
-    rescue SSHKit::Command::Failed
-      execute :sudo, :systemctl, :start, fetch(:application)
     end
   end
 end
