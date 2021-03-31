@@ -12,7 +12,7 @@ A drop-in replacement for [camo](https://github.com/atmos/camo). Uses the same U
 git clone https://github.com/feedbin/privacy-please.git
 cd privacy-please
 bundle install
-bundle exec foreman start
+PRIVACY_KEY=secret bundle exec foreman start
 ```
 
 ## Configuration
@@ -33,6 +33,8 @@ Optional variables
 Replace `img[src]`, `video[poster]` etc… with the proxied url
 
 ```ruby
+ENV["PRIVACY_KEY"] = "secret"
+
 image_url = "http://example.com/image.jpg"
 signature = OpenSSL::HMAC.hexdigest("sha1", ENV["PRIVACY_KEY"], image_url)
 hex_url = image_url.to_enum(:each_byte).map { |byte| "%02x" % byte }.join
