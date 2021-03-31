@@ -10,6 +10,7 @@ group :development do
   gem "capistrano"
   gem "capistrano-bundler"
   gem "foreman"
+  gem "standard"
 end
 
 group :test do

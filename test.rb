@@ -29,7 +29,7 @@ class HelloWorldTest < Minitest::Test
     signature = OpenSSL::HMAC.hexdigest("sha1", "secret", url)
 
     stub_request(:get, url).with(headers: {
-      accept: "image/png,image/svg+xml,image/*",
+      accept: "image/png,image/svg+xml,image/*"
     }).to_return({
       status: 200,
       body: "OK",
@@ -56,5 +56,4 @@ class HelloWorldTest < Minitest::Test
   def hex_encode(string)
     string.to_enum(:each_byte).map { |byte| "%02x" % byte }.join
   end
-
 end

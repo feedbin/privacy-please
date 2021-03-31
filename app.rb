@@ -5,7 +5,7 @@ require "http"
 require "openssl"
 
 def secret_key
-  ENV.fetch("PRIVACY_KEY") { "secret" }
+  ENV.fetch("PRIVACY_KEY", "secret")
 end
 
 def hex_decode(string)
@@ -13,7 +13,7 @@ def hex_decode(string)
 end
 
 def signature_valid?(signature, data)
-  signature == OpenSSL::HMAC.hexdigest('sha1', secret_key, data)
+  signature == OpenSSL::HMAC.hexdigest("sha1", secret_key, data)
 end
 
 def download(url)
@@ -59,4 +59,3 @@ rescue => exception
   logger.error "Exception processing url=#{url} privacy_url=#{params["signature"]}/#{params["url"]}"
   raise exception
 end
-

@@ -5,6 +5,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
+    ast (2.4.2)
     capistrano (3.16.0)
       airbrussh (>= 1.0.0)
       i18n
@@ -42,6 +43,9 @@ GEM
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
     nio4r (2.5.7)
+    parallel (1.20.1)
+    parser (3.0.0.0)
+      ast (~> 2.4.1)
     public_suffix (4.0.6)
     puma (5.2.2)
       nio4r (~> 2.0)
@@ -50,8 +54,25 @@ GEM
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
+    rainbow (3.0.0)
     rake (13.0.3)
+    regexp_parser (2.1.1)
     rexml (3.2.4)
+    rubocop (1.11.0)
+      parallel (~> 1.10)
+      parser (>= 3.0.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.2.0, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.4.1)
+      parser (>= 2.7.1.5)
+    rubocop-performance (1.10.1)
+      rubocop (>= 0.90.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
+    ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.4)
     sd_notify (0.1.1)
     sinatra (2.1.0)
@@ -62,10 +83,14 @@ GEM
     sshkit (1.21.2)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    standard (1.0.4)
+      rubocop (= 1.11.0)
+      rubocop-performance (= 1.10.1)
     tilt (2.0.10)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
+    unicode-display_width (2.0.0)
     webmock (3.12.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -85,6 +110,7 @@ DEPENDENCIES
   rack-test
   sd_notify
   sinatra
+  standard
   webmock
 
 BUNDLED WITH

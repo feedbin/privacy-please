@@ -1,6 +1,6 @@
-workers ENV.fetch("WEB_CONCURRENCY") { Etc.nprocessors }
-threads_count = ENV.fetch("MAX_THREADS") { 64 }
+workers ENV.fetch("WEB_CONCURRENCY", Etc.nprocessors)
+threads_count = ENV.fetch("MAX_THREADS", 64)
 threads threads_count, threads_count
 
-port        ENV.fetch("PORT") { 3000 }
-environment ENV.fetch("RACK_ENV") { "development" }
+port ENV.fetch("PORT", 3000)
+environment ENV.fetch("RACK_ENV", "development")
