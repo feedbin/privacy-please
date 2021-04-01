@@ -35,6 +35,8 @@ get "/:signature/:url" do
 
   halt(404) unless signature_valid?(signature, url)
 
+  headers("X-Original-Image" => url)
+
   response = download(url)
 
   halt(404) unless response.status.ok?
@@ -47,7 +49,6 @@ get "/:signature/:url" do
   headers("X-Content-Type-Options" => "nosniff")
   headers("X-Frame-Options" => "deny")
   headers("X-XSS-Protection" => "1; mode=block")
-  headers("X-Original-Image" => url)
   expires(time_for(DateTime.now.next_year), :public)
 
   stream do |out|
