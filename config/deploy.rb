@@ -17,7 +17,10 @@ namespace :deploy do
   end
   task :restart do
     on roles :all do
-      execute :sudo, :systemctl, :restart, fetch(:application)
+      execute :systemctl, "is-active", fetch(:application)
+      execute :sudo, :systemctl, :kill, "--signal", "SIGUSR1", fetch(:application)
+    rescue SSHKit::Command::Failed
+      execute :sudo, :systemctl, :start, fetch(:application)
     end
   end
 end
