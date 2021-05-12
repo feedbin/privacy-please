@@ -21,6 +21,7 @@ def download(url)
     .follow(max_hops: 5)
     .timeout(connect: 30, write: 10, read: 30)
     .headers(accept: "image/png,image/svg+xml,image/*")
+    .use(:auto_inflate)
     .get(url)
 end
 
