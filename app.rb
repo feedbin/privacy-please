@@ -21,7 +21,6 @@ def download(url)
     .follow(max_hops: 5)
     .timeout(connect: 30, write: 10, read: 30)
     .headers(accept: "image/png,image/svg+xml,image/*")
-    .use(:auto_inflate)
     .get(url)
 end
 
@@ -47,6 +46,7 @@ get "/:signature/:url" do
 
   headers("Content-Type" => content_type)
   headers("Content-Length" => response.content_length) unless response.content_length.nil?
+  headers("Content-Encoding" => response.headers[:content_encoding]) unless response.headers[:content_encoding].nil?
   headers("X-Content-Type-Options" => "nosniff")
   headers("X-Frame-Options" => "deny")
   headers("X-XSS-Protection" => "1; mode=block")
