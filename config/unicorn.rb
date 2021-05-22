@@ -8,7 +8,7 @@ user "app", "app"
 working_directory "/srv/apps/privacy-please/current"
 
 listen "/run/privacy-please.sock"
-pid "/run/privacy-please.pid"
+pid "/tmp/privacy-please.pid"
 
 before_fork do |server, worker|
   old_pid = "/run/unicorn.pid.oldbin"
