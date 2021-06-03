@@ -25,7 +25,7 @@ def download(url)
 end
 
 get "/health_check" do
-  "OK"
+  Puma::Const::PUMA_VERSION
 end
 
 get "/:signature/:url" do
