@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem "puma", "= 5.3.0"
+gem "puma"
 gem "sinatra"
 gem "http"
 gem "sd_notify"
