@@ -25,7 +25,7 @@ def download(url)
 end
 
 get "/health_check" do
-  "OK2"
+  "OK3"
 end
 
 get "/:signature/:url" do
