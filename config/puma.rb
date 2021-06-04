@@ -1,7 +1,5 @@
 require 'etc'
 
-prune_bundler
-
 threads_count = ENV.fetch("MAX_THREADS", 64)
 threads     threads_count, threads_count
 workers     ENV.fetch("WEB_CONCURRENCY", Etc.nprocessors)
