@@ -35,6 +35,8 @@ Optional variables
 Replace `img[src]`, `video[poster]` etc… with the proxied url
 
 ```ruby
+require "openssl"
+
 ENV["PRIVACY_KEY"] = "secret"
 
 image_url = "http://example.com/image.jpg"
