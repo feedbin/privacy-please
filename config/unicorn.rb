@@ -11,4 +11,3 @@ logger Logger.new($stdout)
 
 worker_processes ENV.fetch("WEB_CONCURRENCY", Etc.nprocessors)
 listen           ENV.fetch("PORT", 3000)
-preload_app true
