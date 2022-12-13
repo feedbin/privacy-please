@@ -4,7 +4,6 @@ GEM
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
-    bcrypt (3.1.18)
     crack (0.4.5)
       rexml
     domain_name (0.5.20190701)
@@ -92,7 +91,6 @@ PLATFORMS
 
 DEPENDENCIES
   addressable
-  bcrypt
   foreman
   http
   minitest
