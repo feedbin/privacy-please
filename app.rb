@@ -4,7 +4,7 @@ require "sinatra"
 require "openssl"
 require "addressable"
 require "http"
-require "jwt"
+require "bcrypt"
 
 def secret_key
   ENV.fetch("PRIVACY_KEY", "secret")

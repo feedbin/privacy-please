@@ -5,7 +5,7 @@ gem "unicorn"
 gem "sinatra"
 gem "addressable"
 gem "http"
-gem "jwt"
+gem "bcrypt"
 
 group :development do
   gem "foreman"

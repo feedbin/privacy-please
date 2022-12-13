@@ -4,6 +4,7 @@ GEM
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
+    bcrypt (3.1.18)
     crack (0.4.5)
       rexml
     domain_name (0.5.20190701)
@@ -23,7 +24,6 @@ GEM
       domain_name (~> 0.5)
     http-form_data (2.3.0)
     json (2.6.3)
-    jwt (2.5.0)
     kgio (2.11.4)
     language_server-protocol (3.17.0.2)
     llhttp-ffi (0.4.0)
@@ -92,9 +92,9 @@ PLATFORMS
 
 DEPENDENCIES
   addressable
+  bcrypt
   foreman
   http
-  jwt
   minitest
   rack-test
   sinatra
