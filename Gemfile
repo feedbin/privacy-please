@@ -5,6 +5,7 @@ gem "unicorn"
 gem "sinatra"
 gem "addressable"
 gem "http"
+gem "jwt"
 
 group :development do
   gem "capistrano"
