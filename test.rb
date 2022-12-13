@@ -25,32 +25,12 @@ class HelloWorldTest < Minitest::Test
 
   def test_proxy
     url = "http://example.com/image.jpg"
-    content_type = "image/jpeg"
     signature = OpenSSL::HMAC.hexdigest("sha1", "secret", url)
 
-    stub_request(:get, url).with(headers: {
-      accept: "image/png,image/svg+xml,image/*"
-    }).to_return({
-      status: 200,
-      body: "OK",
-      headers: {content_type: content_type}
-    })
-
     get "/#{signature}/#{hex_encode(url)}"
+
     assert last_response.ok?
-    assert_equal content_type, last_response.get_header("Content-Type")
-  end
-
-  def test_wrong_content_type
-    url = "http://example.com/image.jpg"
-    signature = OpenSSL::HMAC.hexdigest("sha1", "secret", url)
-
-    stub_request(:get, url).to_return({
-      status: 500
-    })
-
-    get "/#{signature}/#{hex_encode(url)}"
-    assert last_response.not_found?
+    assert_equal("/remote/http/example.com/image.jpg", last_response.headers["X-Accel-Redirect"])
   end
 
   def hex_encode(string)

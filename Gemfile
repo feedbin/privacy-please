@@ -1,10 +1,9 @@
 source "https://rubygems.org"
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem "puma"
+gem "unicorn"
 gem "sinatra"
-gem "http"
-gem "sd_notify"
+gem "addressable"
 
 group :development do
   gem "capistrano"
