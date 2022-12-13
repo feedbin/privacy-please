@@ -16,13 +16,30 @@ GEM
     concurrent-ruby (1.1.10)
     crack (0.4.5)
       rexml
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
+    ffi (1.15.5)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     foreman (0.87.2)
     hashdiff (1.0.1)
+    http (5.1.0)
+      addressable (~> 2.8)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.2)
+      llhttp-ffi (~> 0.4.0)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
+    http-form_data (2.3.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     json (2.6.3)
     kgio (2.11.4)
     language_server-protocol (3.17.0.2)
+    llhttp-ffi (0.4.0)
+      ffi-compiler (~> 1.0)
+      rake (~> 13.0)
     minitest (5.16.3)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
@@ -73,6 +90,9 @@ GEM
       rubocop (= 1.39.0)
       rubocop-performance (= 1.15.1)
     tilt (2.0.11)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8.2)
     unicode-display_width (2.3.0)
     unicorn (6.1.0)
       kgio (~> 2.6)
@@ -92,6 +112,7 @@ DEPENDENCIES
   capistrano
   capistrano-bundler
   foreman
+  http
   minitest
   rack-test
   sinatra

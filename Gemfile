@@ -4,6 +4,7 @@ git_source(:github) { |name| "https://github.com/#{name}.git" }
 gem "unicorn"
 gem "sinatra"
 gem "addressable"
+gem "http"
 
 group :development do
   gem "capistrano"
