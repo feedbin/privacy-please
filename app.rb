@@ -61,4 +61,6 @@ get "/redirect" do
   url = params["url"]
   new_location = download(url).uri.to_s
   accel_redirect(new_location)
+rescue HTTP::StateError
+  halt(404)
 end
