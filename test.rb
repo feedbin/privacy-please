@@ -30,7 +30,8 @@ class HelloWorldTest < Minitest::Test
     get "/#{signature}/#{hex_encode(url)}"
 
     assert last_response.ok?
-    assert_equal("/remote/http/example.com/image.jpg", last_response.headers["X-Accel-Redirect"])
+    assert_equal("/remote", last_response.headers["X-Accel-Redirect"])
+    assert_equal(url, last_response.headers["X-Original-Image"])
   end
 
   def hex_encode(string)
