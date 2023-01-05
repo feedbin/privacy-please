@@ -32,10 +32,7 @@ def accel_redirect(url)
 
   halt(404) unless parsed.scheme =~ /^http/
 
-  remainder = parsed.to_s.delete_prefix("#{parsed.scheme}://")
-  redirect  = "/remote/#{parsed.scheme}/#{remainder}"
-
-  headers("X-Accel-Redirect" => redirect)
+  headers("X-Accel-Redirect" => "/remote")
 
   ""
 end
@@ -51,6 +48,8 @@ get "/:signature/:url" do
 
   halt(404) unless signature_valid?(signature, url)
 
+  logger.info "Proxying url=#{url}"
+
   accel_redirect(url)
 rescue => exception
   logger.error "Exception processing url=#{url} privacy_url=#{params["signature"]}/#{params["url"]}"
@@ -60,6 +59,9 @@ end
 get "/redirect" do
   url = params["url"]
   new_location = download(url).uri.to_s
+
+  logger.info "Redirecting url=#{url}"
+
   accel_redirect(new_location)
 rescue HTTP::StateError
   halt(404)
