@@ -45,8 +45,8 @@ get "/:signature/:url" do
   content_type = content_type&.start_with?("image/") ? content_type : "application/octet-stream"
 
   headers("Content-Type" => content_type)
-  headers("Content-Length" => response.content_length) unless response.content_length.nil?
-  headers("Content-Encoding" => response.headers[:content_encoding]) unless response.headers[:content_encoding].nil?
+  headers("Content-Length" => response.content_length.to_s) unless response.content_length.nil?
+  headers("Content-Encoding" => response.headers[:content_encoding].to_s) unless response.headers[:content_encoding].nil?
   headers("X-Content-Type-Options" => "nosniff")
   headers("X-Frame-Options" => "deny")
   headers("X-XSS-Protection" => "1; mode=block")
