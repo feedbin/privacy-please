@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 require "sinatra"
-require "openssl"
-require "addressable"
 require "http"
+require "openssl"
 
 def secret_key
   ENV.fetch("PRIVACY_KEY", "secret")
@@ -25,18 +24,6 @@ def download(url)
     .get(url)
 end
 
-def accel_redirect(url)
-  parsed = Addressable::URI.heuristic_parse(url)
-
-  headers("X-Original-Image" => parsed.to_s)
-
-  halt(404) unless parsed.scheme =~ /^http/
-
-  headers("X-Accel-Redirect" => "/remote")
-
-  ""
-end
-
 get "/health_check" do
   "OK"
 end
@@ -48,21 +35,30 @@ get "/:signature/:url" do
 
   halt(404) unless signature_valid?(signature, url)
 
-  logger.info "Proxying url=#{url}"
+  headers("X-Original-Image" => url)
 
-  accel_redirect(url)
+  response = download(url)
+
+  halt(404) unless response.status.ok?
+
+  content_type = response.content_type.mime_type
+  content_type = content_type&.start_with?("image/") ? content_type : "application/octet-stream"
+
+  headers("Content-Type" => content_type)
+  headers("Content-Length" => response.content_length) unless response.content_length.nil?
+  headers("Content-Encoding" => response.headers[:content_encoding]) unless response.headers[:content_encoding].nil?
+  headers("X-Content-Type-Options" => "nosniff")
+  headers("X-Frame-Options" => "deny")
+  headers("X-XSS-Protection" => "1; mode=block")
+  expires(time_for(DateTime.now.next_year), :public)
+
+  stream do |out|
+    response.body.each do |chunk|
+      out << chunk
+      chunk.clear
+    end
+  end
 rescue => exception
   logger.error "Exception processing url=#{url} privacy_url=#{params["signature"]}/#{params["url"]}"
   raise exception
-end
-
-get "/redirect" do
-  url = params["url"]
-  new_location = download(url).uri.to_s
-
-  logger.info "Redirecting url=#{url}"
-
-  accel_redirect(new_location)
-rescue HTTP::StateError
-  halt(404)
 end
