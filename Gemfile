@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |name| "https://github.com/#{name}.git" }
 
-gem "unicorn"
+gem "puma"
 gem "sinatra"
 gem "addressable"
 gem "http"
