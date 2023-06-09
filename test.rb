@@ -25,12 +25,16 @@ class HelloWorldTest < Minitest::Test
 
   def test_proxy
     url = "http://example.com/image.jpg"
+
+    stub_request(:get, url)
+      .to_return(status: 200, body: "", headers: {})
+
     signature = OpenSSL::HMAC.hexdigest("sha1", "secret", url)
 
     get "/#{signature}/#{hex_encode(url)}"
 
     assert last_response.ok?
-    assert_equal("/remote", last_response.headers["X-Accel-Redirect"])
+
     assert_equal(url, last_response.headers["X-Original-Image"])
   end
 

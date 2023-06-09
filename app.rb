@@ -33,13 +33,19 @@ get "/:signature/:url" do
 
   signature = params["signature"]
 
-  halt(404) unless signature_valid?(signature, url)
+  unless signature_valid?(signature, url)
+    logger.error "Signature invalid url=#{url} signature=#{params["signature"]}"
+    halt(404)
+  end
 
   headers("X-Original-Image" => url)
 
   response = download(url)
 
-  halt(404) unless response.status.ok?
+  unless response.status.ok?
+    logger.error "Upstream response error url=#{url} status=#{response.status.code}"
+    halt(404)
+  end
 
   content_type = response.content_type.mime_type
   content_type = content_type&.start_with?("image/") ? content_type : "application/octet-stream"
