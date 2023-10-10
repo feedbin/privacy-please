@@ -58,6 +58,8 @@ get "/:signature/:url" do
   headers("X-XSS-Protection" => "1; mode=block")
   expires(time_for(DateTime.now.next_year), :public)
 
+  logger.error "Serving url=#{url} privacy_url=#{params["signature"]}/#{params["url"]}"
+
   stream do |out|
     response.body.each do |chunk|
       out << chunk
