@@ -20,7 +20,10 @@ def download(url)
   HTTP
     .follow(max_hops: 5)
     .timeout(connect: 30, write: 10, read: 30)
-    .headers(accept: "image/png,image/svg+xml,image/*")
+    .headers(
+      accept: "image/png,image/svg+xml,image/*",
+      user_agent: ENV.fetch("USER_AGENT", "Privacy Please")
+    )
     .get(url)
 end
 
@@ -34,7 +37,7 @@ get "/:signature/:url" do
   signature = params["signature"]
 
   unless signature_valid?(signature, url)
-    logger.error "Signature invalid url=#{url} signature=#{params["signature"]}"
+    logger.error "Signature invalid url=#{url} privacy_url=#{params["signature"]}/#{params["url"]}"
     halt(404)
   end
 
@@ -43,7 +46,7 @@ get "/:signature/:url" do
   response = download(url)
 
   unless response.status.ok?
-    logger.error "Upstream response error url=#{url} status=#{response.status.code}"
+    logger.error "Upstream response error url=#{url} status=#{response.status.code} privacy_url=#{params["signature"]}/#{params["url"]}"
     halt(404)
   end
 
